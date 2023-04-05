@@ -3,7 +3,7 @@ Query documents and spreadsheets with natural language
 # Demo
 ![image](https://user-images.githubusercontent.com/40268197/230076417-bb52cc98-4575-487a-bdea-c8f20685aeb8.png)
 # Installation
-Download/Clone this repositry.
+Download/Clone this repository.
 
 Install requirements with pip install -r requirements.txt
 
