@@ -5,9 +5,11 @@ Query documents and spreadsheets with natural language
 # Installation
 Download/Clone this repository.
 
+Install Python (latest)
+
 Install requirements with pip install -r requirements.txt
 
-Bring your own OpenAI API key - set it as an enviroment variable for this project.
+Bring your own OpenAI API key - set it as an enviroment variable called OPEN_API_KEY
 
 # Usage
 
