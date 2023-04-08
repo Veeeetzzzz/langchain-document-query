@@ -1,7 +1,7 @@
 # NoMoreSQL
 Query documents and spreadsheets with natural language
 # Demo
-![image](https://user-images.githubusercontent.com/40268197/230076417-bb52cc98-4575-487a-bdea-c8f20685aeb8.png)
+![image](https://user-images.githubusercontent.com/40268197/230733615-e850db91-152a-4430-881e-2dbe74aaba5c.png)
 # Installation
 Download/Clone this repository.
 
