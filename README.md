@@ -7,11 +7,21 @@ Query documents and spreadsheets with natural language
 
 Python - https://www.python.org/downloads/
 
+If you've used `git clone` before skip, if not run in PowerShell:
+
+`winget install --id Git.Git -e --source winget`
+
+Then clone:
+
 `git clone https://github.com/Veeeetzzzz/NoMoreSQL.git`
+
+Change directory:
 
 `cd NoMoreSQL`
 
-Install requirements: `pip install -r requirements.txt`
+Install requirements: 
+
+`pip install -r requirements.txt`
 
 Bring your own OpenAI API key - set it as an enviroment variable called `OPEN_API_KEY`
 
