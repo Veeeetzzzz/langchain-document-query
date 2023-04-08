@@ -3,17 +3,21 @@ Query documents and spreadsheets with natural language
 # Demo
 ![image](https://user-images.githubusercontent.com/40268197/230733615-e850db91-152a-4430-881e-2dbe74aaba5c.png)
 # Installation
-Download/Clone this repository.
 
-Install Python (latest)
 
-Install requirements with pip install -r requirements.txt
+Python - https://www.python.org/downloads/
 
-Bring your own OpenAI API key - set it as an enviroment variable called OPEN_API_KEY
+`git clone https://github.com/Veeeetzzzz/NoMoreSQL.git`
+
+`cd NoMoreSQL`
+
+Install requirements: `pip install -r requirements.txt`
+
+Bring your own OpenAI API key - set it as an enviroment variable called `OPEN_API_KEY`
 
 # Usage
 
-Assuming you installed all the prequisites and didn't get any errors - use the "flask run" command in the cloned/downloaded directory and visit 127.0.0.1:5000
+Use the `flask run` command and visit 127.0.0.1:5000
 
 # Other notes
 
