@@ -1,89 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Querying documents with natural language</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  </head>
-
-  <body class="bg-gray-100">
+</head>
+<body class="bg-gray-100">
     <div class="container mx-auto px-4 py-5">
-      <h1 class="text-3xl font-bold mb-5">Querying documents with natural language</h1>
+        <h1 class="text-3xl font-bold mb-5">Querying documents with natural language</h1>
 
-      <div class="bg-white shadow-md rounded p-5">
-        <form id="query-form">
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="content">Upload text or csv file:</label>
-            <input class="border border-gray-300 p-2 rounded" type="file" id="content" name="content" accept=".txt">
-          </div>
-          <div>
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="upload-pdf">Upload PDF - Coming Soon</label>
-            <input class="border border-gray-300 p-2 rounded" type="file" id="upload-pdf" name="upload-pdf" accept=".pdf" disabled>
-          </div>
-          <br>
-          <div>
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="load-url">Load URL - Coming Soon</label>
-            <div class="flex items-center">
-              <input class="border border-gray-300 p-2 rounded mr-2" type="text" id="load-url" name="load-url" placeholder="Enter URL here..." pattern="https?://.+(\..{2,})" disabled>
-              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="button" id="load-url-button" disabled>Load URL</button>
-            </div>
-          </div>
-          <br>
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="query">Ask your query:</label>
-            <input class="w-full border border-gray-300 p-2 rounded" type="text" id="query" name="query" placeholder="Enter your query here...">
-          </div>
+        <div class="bg-white shadow-md rounded p-5">
+            <form id="query-form" enctype="multipart/form-data">
+                <div class="grid grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="content">Upload text or csv file:</label>
+                        <input class="border border-gray-300 p-2 rounded" type="file" id="content" name="content" accept=".txt,.csv">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="upload-pdf">Upload PDF:</label>
+                        <input class="border border-gray-300 p-2 rounded" type="file" id="upload-pdf" name="upload-pdf" accept=".pdf">
+                    </div>
+                </div>
+                <div class="mb-4 mt-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="query">Ask your query:</label>
+                    <input class="w-full border border-gray-300 p-2 rounded" type="text" id="query" name="query" placeholder="Enter your query here...">
+                </div>
+                
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+            </form>
+        </div>
 
-          <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
-        </form>
-      </div>
-
-      <div class="bg-white shadow-md rounded p-5 mt-5" id="response-container" style="display: none;">
-        <h2 class="text-xl font-bold mb-4">Response:</h2>
-        <pre id="response-text" class="text-gray-800 whitespace-pre-wrap"></pre>
-      </div>
+        <div class="bg-white shadow-md rounded p-5 mt-5" id="response-container" style="display: none;">
+            <h2 class="text-xl font-bold mb-4">Response:</h2>
+            <pre id="response-text" class="text-gray-800 whitespace-pre-wrap"></pre>
+        </div>
     </div>
 
-    <script>
-      $("#query-form").submit(function(event) {
-        event.preventDefault();
-        var content = $("#content")[0].files[0];
-        var query = $("#query").val().trim();
+<script>
+$("#query-form").on("submit", function (event) {
+    event.preventDefault();
+    var formData = new FormData(this);
+    var query = $("#query").val().trim();
+    
+    if (!formData.get("content") && !formData.get("upload-pdf") || !query) {
+        alert("Please upload a text, csv or pdf file and provide a query.");
+        return;
+    }
 
-        if (!content || !query) {
-          alert("Please upload a text file and provide a query.");
-          return;
-        }
+    var file = formData.get("content") || formData.get("upload-pdf");
+    var file_ext = file.name.split(".").pop();
+    
+    formData.append("file_ext", "." + file_ext);
 
-        var file_ext = content.name.split(".").pop();
-        if (file_ext !== "txt" && file_ext !== "csv") {
-          alert("Please upload a .txt or .csv file.");
-          return;
-        }
-
-        var reader = new FileReader();
-        reader.onload = function(e) {
-          var contentText = e.target.result;
-          $.post("/ask", {
-            content: contentText,
-            query: query,
-            file_ext: "." + file_ext
-          }, function(data) {
+    $.ajax({
+        url: "/ask",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
             if (data.error) {
-              alert(data.error);
+                alert(data.error);
             } else {
-              $("#response-text").text(data.response);
-              $("#response-container").show();
+                $("#response-text").text(data.response);
+                $("#response-container").show();
             }
-          });
-        };
-        reader.readAsText(content);
-      });
-
-    </script>
-  </body>
-
-</html>
+        },
+        error: function (xhr, status, error) {
+            alert("An error occurred: " + error);
+        }
+    });
+});
+</script>
