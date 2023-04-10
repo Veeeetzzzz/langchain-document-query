@@ -1,7 +1,9 @@
 import io
 import csv
+import os
 from flask import Flask, render_template, request, jsonify
-from langchain.document_loaders import TextLoader
+from werkzeug.utils import secure_filename
+from langchain.document_loaders import TextLoader, PyMuPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
@@ -39,6 +41,14 @@ class StringIOCSVLoader(CSVLoader):
                 documents.append(CSVDocument(page_content=content))
         return documents
 
+class PDFLoader:
+    def __init__(self, pdf_file):
+        self.pdf_file = pdf_file
+
+    def load(self):
+        loader = PyMuPDFLoader(self.pdf_file)
+        return loader.load()
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -47,20 +57,25 @@ def home():
 
 @app.route("/ask", methods=["POST"])
 def ask_query():
-    content = request.form["content"]
+    content = request.files.get("content")
     query = request.form["query"]
     file_ext = request.form["file_ext"]
+    pdf_file = request.files.get("upload-pdf")
 
-    if not content or not query or not file_ext:
+    if not query or not file_ext:
         return jsonify({"error": "Invalid input."})
 
     if file_ext == ".txt":
-        loader = StringIOTextLoader(io.StringIO(content))
+        loader = StringIOTextLoader(io.StringIO(content.read().decode("utf-8")))
     elif file_ext == ".csv":
-        loader = StringIOCSVLoader(io.StringIO(content))
+        loader = StringIOCSVLoader(io.StringIO(content.read().decode("utf-8")))
+    elif pdf_file:
+        pdf_filename = secure_filename(pdf_file.filename)
+        pdf_file.save(pdf_filename)
+        loader = PDFLoader(pdf_filename)
     else:
         return jsonify({"error": "Unsupported file type."})
-
+        
     documents = loader.load()
     text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
     texts = text_splitter.split_documents(documents)
