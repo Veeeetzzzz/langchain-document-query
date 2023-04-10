@@ -1,7 +1,7 @@
 # NoMoreSQL
 Query documents and spreadsheets with natural language
 # Demo
-![image](https://user-images.githubusercontent.com/40268197/230733615-e850db91-152a-4430-881e-2dbe74aaba5c.png)
+![image](https://user-images.githubusercontent.com/40268197/230964998-ad99c0ba-f1e1-44f8-9863-c12611d711a4.png)
 # Installation
 
 
