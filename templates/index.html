@@ -22,6 +22,10 @@
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="upload-pdf">Upload PDF:</label>
                         <input class="border border-gray-300 p-2 rounded" type="file" id="upload-pdf" name="upload-pdf" accept=".pdf">
                     </div>
+					 <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="upload-db">Upload DB file:</label>
+                        <input class="border border-gray-300 p-2 rounded" type="file" id="upload-db" name="upload-db" accept=".db">
+                    </div>
                 </div>
                 <div class="mb-4 mt-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="query">Ask your query:</label>
@@ -45,7 +49,7 @@ $("#query-form").on("submit", function (event) {
     var query = $("#query").val().trim();
     
     if (!formData.get("content") && !formData.get("upload-pdf") || !query) {
-        alert("Please upload a text, csv or pdf file and provide a query.");
+        alert("Please upload a text, csv, pdf or .DB file and ask a question.");
         return;
     }
 
