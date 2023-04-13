@@ -22,7 +22,7 @@
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="upload-pdf">Upload PDF:</label>
                         <input class="border border-gray-300 p-2 rounded" type="file" id="upload-pdf" name="upload-pdf" accept=".pdf">
                     </div>
-					 <div>
+		     <div>
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="upload-db">Upload DB file:</label>
                         <input class="border border-gray-300 p-2 rounded" type="file" id="upload-db" name="upload-db" accept=".db">
                     </div>
@@ -43,7 +43,7 @@
     </div>
 
 <script>
-$("#query-form").on("submit", function (event) {
+$(document).on("submit", "#query-form", function (event) {
     event.preventDefault();
     var formData = new FormData(this);
     var query = $("#query").val().trim();
