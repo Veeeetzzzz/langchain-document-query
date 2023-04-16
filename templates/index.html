@@ -4,58 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Querying documents with natural language</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body class="bg-gray-100">
-    <div class="container mx-auto px-4 py-5">
-        <h1 class="text-3xl font-bold mb-5">Querying documents with natural language</h1>
-
-        <div class="bg-white shadow-md rounded p-5">
+<body>
+    <div class="flex one whole center double-padded">
+        <section class="half">
+            <h1 class="text-3xl font-bold mb-5">Querying documents with natural language</h1>
             <form id="query-form" enctype="multipart/form-data">
-                <div class="grid grid-cols-3 gap-4">
+                <div class="flex two">
                     <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="content">Upload text or csv file:</label>
-                        <input class="border border-gray-300 p-2 rounded" type="file" id="content" name="content" accept=".txt,.csv">
+                        <label for="content">Upload text or csv file:</label>
+                        <input type="file" id="content" name="content" accept=".txt,.csv">
                     </div>
                     <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="upload-pdf">Upload PDF:</label>
-                        <input class="border border-gray-300 p-2 rounded" type="file" id="upload-pdf" name="upload-pdf" accept=".pdf">
+                        <label for="upload-pdf">Upload PDF:</label>
+                        <input type="file" id="upload-pdf" name="upload-pdf" accept=".pdf">
                     </div>
-		     <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="upload-db">Upload DB file:</label>
-                        <input class="border border-gray-300 p-2 rounded" type="file" id="upload-db" name="upload-db" accept=".db">
+                    <div>
+                        <label for="upload-db">Upload DB file:</label>
+                        <input type="file" id="upload-db" name="upload-db" accept=".db">
                     </div>
                 </div>
-                <div class="mb-4 mt-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="query">Ask your query:</label>
-                    <input class="w-full border border-gray-300 p-2 rounded" type="text" id="query" name="query" placeholder="Enter your query here...">
+                <div>
+                    <label for="query">Ask your query:</label>
+                    <input type="text" id="query" name="query" placeholder="Enter your query here...">
                 </div>
-                
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+                <button type="submit" class="primary">Submit</button>
             </form>
-        </div>
-
-        <div class="bg-white shadow-md rounded p-5 mt-5" id="response-container" style="display: none;">
-            <h2 class="text-xl font-bold mb-4">Response:</h2>
-            <pre id="response-text" class="text-gray-800 whitespace-pre-wrap"></pre>
-        </div>
+            <div id="response-container" style="display: none;">
+                <h2 class="text-xl font-bold mb-4">Response:</h2>
+                <pre id="response-text" class="text-gray-800 whitespace-pre-wrap"></pre>
+            </div>
+        </section>
     </div>
+	<script>
+function checkFileSize(file, maxSize) {
+    var size = file.size;
+    return size <= maxSize;
+}
 
-<script>
+function checkFileFormat(file, allowedFormats) {
+    var ext = file.name.split(".").pop();
+    return allowedFormats.includes(ext);
+}
+
 $(document).on("submit", "#query-form", function (event) {
     event.preventDefault();
     var formData = new FormData(this);
     var query = $("#query").val().trim();
-    
+
     if (!formData.get("content") && !formData.get("upload-pdf") || !query) {
-        alert("Please upload a text, csv, pdf or .DB file and ask a question.");
+        alert("Please upload a text, csv, pdf, or .DB file and ask a question.");
         return;
     }
 
     var file = formData.get("content") || formData.get("upload-pdf");
     var file_ext = file.name.split(".").pop();
     
+    if (!checkFileSize(file, 5 * 1024 * 1024)) { // 5 MB file size limit
+        alert("File size should not exceed 5 MB.");
+        return;
+    }
+
+    if (!checkFileFormat(file, ["txt", "csv", "pdf", "db"])) {
+        alert("Invalid file format. Only .txt, .csv, .pdf, and .db files are allowed.");
+        return;
+    }
+
     formData.append("file_ext", "." + file_ext);
 
     $.ajax({
@@ -78,3 +94,5 @@ $(document).on("submit", "#query-form", function (event) {
     });
 });
 </script>
+</body>
+</html>
