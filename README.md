@@ -1,4 +1,6 @@
 # NoMoreSQL
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
 Proof of concept that let's you query documents, spreadsheets and databases with natural language
 # Demo
 ![image](https://user-images.githubusercontent.com/40268197/231802036-e7aca4a1-5213-4a1c-869b-f993351df18d.png)
@@ -48,11 +50,3 @@ For commercial usage, please refer to the license below & and choose a productio
 There will be bugs. Although this is an improvement over OpenAI alone, sometimes it gets things wrong. 
 
 Please feel free to contribute by raising an issue or pull request. Unfortunately I can't guarentee the stability or future development plans and the code is provided on an as-is basis with no promises.
-
-# License
-
-[![Creative Commons License](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
-
-This work is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
-
-TL;DR This license lets others distribute, remix, adapt, and build upon this work, even commercially, as long as you credit me for the original creation
