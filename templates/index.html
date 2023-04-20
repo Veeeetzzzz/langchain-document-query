@@ -4,42 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Querying documents with natural language</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .sidebar {
+            background-color: #f8f9fa;
+            width: 200px;
+            height: 100vh;
+            position: fixed;
+            padding-top: 1rem;
+        }
+
+    .sidebar a {
+        text-decoration: none;
+        color: #212529;
+        display: block;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .sidebar a:hover {
+        background-color: #adb5bd;
+        color: #fff;
+    }
+
+    .main-content {
+        margin-left: 200px;
+        padding: 2rem;
+    }
+</style>
+
 </head>
 <body>
-    <div class="flex one whole center double-padded">
-        <section class="half">
-            <h1 class="text-3xl font-bold mb-5">Querying documents with natural language</h1>
-            <form id="query-form" enctype="multipart/form-data">
-                <div class="flex two">
-                    <div>
-                        <label for="content">Upload text or csv file:</label>
-                        <input type="file" id="content" name="content" accept=".txt,.csv">
-                    </div>
-                    <div>
-                        <label for="upload-pdf">Upload PDF:</label>
-                        <input type="file" id="upload-pdf" name="upload-pdf" accept=".pdf">
-                    </div>
-                    <div>
-                        <label for="upload-db">Upload DB file:</label>
-                        <input type="file" id="upload-db" name="upload-db" accept=".db">
-                    </div>
-                </div>
-                <div>
-                    <label for="query">Ask your query:</label>
-                    <input type="text" id="query" name="query" placeholder="Enter your query here...">
-                </div>
-                <button type="submit" class="primary">Submit</button>
-            </form>
-            <div id="response-container" style="display: none;">
-                <h2 class="text-xl font-bold mb-4">Response:</h2>
-                <pre id="response-text" class="text-gray-800 whitespace-pre-wrap"></pre>
-            </div>
-        </section>
+    <div class="sidebar">
+        <a href="#" class="new-chat">New Chat</a>
+        <a href="#" class="conversation-history">Conversation History</a>
     </div>
-	<script>
-function checkFileSize(file, maxSize) {
+    <div class="main-content">
+        <h1 class="text-3xl font-bold mb-5">Querying documents with natural language</h1>
+        <form id="query-form" enctype="multipart/form-data">
+            <div>
+                <label for="input-type">Select input type:</label>
+                <select id="input-type" name="input-type">
+                    <option value="text/csv">Text/CSV file</option>
+                    <option value="pdf">PDF</option>
+                    <option value="db">DB file</option>
+                </select>
+            </div>
+            <div id="input-container">
+                <label for="content">Upload file:</label>
+                <input type="file" id="content" name="content" accept=".txt,.csv,.pdf,.db">
+            </div>
+            <div>
+                <label for="query">Ask your query:</label>
+                <input type="text" id="query" name="query" placeholder="Enter your query here...">
+            </div>
+            <button type="submit" class="primary">Submit</button>
+        </form>
+        <div id="response-container" style="display: none;">
+            <h2 class="text-xl font-bold mb-4">Response:</h2>
+            <pre id="response-text" class="text-gray-800 whitespace-pre-wrap"></pre>
+        </div>
+    </div>
+    <script>
+    function checkFileSize(file, maxSize) {
     var size = file.size;
     return size <= maxSize;
 }
