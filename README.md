@@ -4,7 +4,7 @@
 Proof of concept that let's you query documents, spreadsheets and databases with natural language
 # Demo
 ![image](https://user-images.githubusercontent.com/40268197/231802036-e7aca4a1-5213-4a1c-869b-f993351df18d.png)
-# Installation
+# Installation for Windows
 
 
 Python - https://www.python.org/downloads/
