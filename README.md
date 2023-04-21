@@ -27,6 +27,35 @@ Install requirements:
 
 Bring your own OpenAI API key - set it as an enviroment variable called `OPEN_API_KEY`
 
+# Installation for Python
+
+Python - Install Python from your package manager or by visiting https://www.python.org/downloads/
+
+If you've used git clone before, skip this. If not, install git by running in Terminal:
+
+`sudo apt-get update`
+`sudo apt-get install git`
+
+For other Linux distributions, use the appropriate package manager and command.
+
+Then clone the repository:
+
+`git clone https://github.com/Veeeetzzzz/NoMoreSQL.git`
+
+Change directory:
+
+`cd NoMoreSQL`
+
+Install requirements:
+
+`pip install -r requirements.txt`
+
+Bring your own OpenAI API key - set it as an environment variable called OPEN_API_KEY:
+
+`export OPEN_API_KEY="your_openai_api_key_here"`
+
+Replace 'your_openai_api_key_here' with your actual OpenAI API key.
+
 # Usage
 
 Use the `flask run` command and visit 127.0.0.1:5000
