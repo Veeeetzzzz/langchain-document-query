@@ -1,7 +1,9 @@
+# Importing required libraries and modules
 import csv, io
 from flask import Flask, jsonify, request, render_template
 from werkzeug.utils import secure_filename
 
+# Importing required modules from langchain library
 from langchain.agents import AgentExecutor, create_sql_agent
 from langchain.agents.agent_toolkits import SQLDatabaseToolkit
 from langchain.chains import RetrievalQA
@@ -11,6 +13,8 @@ from langchain.llms import OpenAI
 from langchain.sql_database import SQLDatabase
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import Chroma
+
+# Importing required module for data validation
 from pydantic import BaseModel
 
 class StringIODocument(BaseModel):
