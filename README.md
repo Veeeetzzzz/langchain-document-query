@@ -3,7 +3,7 @@
 
 Proof of concept that let's you query documents, spreadsheets and databases with natural language
 # Demo
-![image](https://user-images.githubusercontent.com/40268197/231802036-e7aca4a1-5213-4a1c-869b-f993351df18d.png)
+![image](https://user-images.githubusercontent.com/40268197/233853273-94d1c117-dce0-4be5-9698-db9ff3d3408e.png)
 # Installation for Windows
 
 
