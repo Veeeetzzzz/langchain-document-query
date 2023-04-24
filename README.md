@@ -27,7 +27,7 @@ Install requirements:
 
 Bring your own OpenAI API key - set it as an enviroment variable called `OPEN_API_KEY`
 
-# Installation for Python
+# Installation for Linux
 
 Python - Install Python from your package manager or by visiting https://www.python.org/downloads/
 
