@@ -1,5 +1,6 @@
 # NoMoreSQL
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![CodeFactor](https://www.codefactor.io/repository/github/veeeetzzzz/nomoresql/badge)](https://www.codefactor.io/repository/github/veeeetzzzz/nomoresql)
 
 Proof of concept that let's you query documents, spreadsheets and databases with natural language
 # Demo
