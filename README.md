@@ -7,6 +7,9 @@ Proof of concept that let's you query documents, spreadsheets and databases with
 ![image](https://user-images.githubusercontent.com/40268197/233853273-94d1c117-dce0-4be5-9698-db9ff3d3408e.png)
 # Installation for Windows
 
+You can run the PowerShell script as an admin or follow the steps below.
+
+The script will check if Python, winget, and Git are installed, and if not, it will prompt you to install them. Then, it will clone the NoMoreSQL repository, change the directory, install the requirements, and ask you to enter your OpenAI API key to set it as an environment variable called "OPEN_API_KEY".
 
 Python - https://www.python.org/downloads/
 
