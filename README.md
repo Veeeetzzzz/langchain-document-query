@@ -1,8 +1,8 @@
-# NoMoreSQL
+# Querying documents & databases with Langchain
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![CodeFactor](https://www.codefactor.io/repository/github/veeeetzzzz/nomoresql/badge)](https://www.codefactor.io/repository/github/veeeetzzzz/nomoresql)
 
-Proof of concept that let's you query documents, spreadsheets and databases with natural language
+Proof of concept that let's you query documents, spreadsheets and databases with natural language in a front end. Tech stack used includes Langchain and ChromaDB.
 # Demo
 ![image](https://user-images.githubusercontent.com/40268197/233853273-94d1c117-dce0-4be5-9698-db9ff3d3408e.png)
 # Installation for Windows
@@ -19,7 +19,7 @@ If you've used `git clone` before skip, if not run in PowerShell:
 
 Then clone:
 
-`git clone https://github.com/Veeeetzzzz/NoMoreSQL.git`
+`git clone https://github.com/Veeeetzzzz/langchain-document-query.git`
 
 Change directory:
 
@@ -44,7 +44,7 @@ For other Linux distributions, use the appropriate package manager and command.
 
 Then clone the repository:
 
-`git clone https://github.com/Veeeetzzzz/NoMoreSQL.git`
+`git clone https://github.com/Veeeetzzzz/langchain-document-query.git`
 
 Change directory:
 
