@@ -83,3 +83,5 @@ For commercial usage, please refer to the license below & and choose a productio
 There will be bugs. Although this is an improvement over OpenAI alone, sometimes it gets things wrong. 
 
 Please feel free to contribute by raising an issue or pull request. Unfortunately I can't guarentee the stability or future development plans and the code is provided on an as-is basis with no promises.
+
+Note: When Microsoft releases Co-Pilot across Office 365 Apps - the need for these tools will reduce, instead of building front facing public sites, users will shift towards running local LLMs and using this functionality in various ways depending on the business use case, all hosted on the companies private or rented infrastructure for optimal data compliance.
